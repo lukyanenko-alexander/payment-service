@@ -1,0 +1,8 @@
+FROM rabbitmq:3.12-management-alpine
+
+ARG DELAYED_PLUGIN_VERSION=3.12.0
+
+RUN apk add --no-cache curl && \
+    curl -L "https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v${DELAYED_PLUGIN_VERSION}/rabbitmq_delayed_message_exchange-${DELAYED_PLUGIN_VERSION}.ez" \
+    -o "/opt/rabbitmq/plugins/rabbitmq_delayed_message_exchange-${DELAYED_PLUGIN_VERSION}.ez" && \
+    rabbitmq-plugins enable rabbitmq_delayed_message_exchange
